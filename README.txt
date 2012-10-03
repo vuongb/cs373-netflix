@@ -13,9 +13,9 @@ Actual    number of hours:
 
 Partner First Name: Ryan
 Partner Last Name: Prater
-Partner EID:
-Partner E-mail:
-Partner Estimated number of hours:
+Partner EID: rp22566
+Partner E-mail: ryanprater@utexas.edu
+Partner Estimated number of hours: 10
 Partner Actual    number of hours:
 
 Turnin CS Username:
