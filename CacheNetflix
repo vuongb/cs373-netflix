@@ -12,9 +12,9 @@
 
 """
 To run the program
-    % python RunNetflix.py < RunNetflix.in > RunNetflix.out
+    % python CacheNetflix.py < <>.txt > <>.txt
     % chmod ugo+x RunNetflix.py
-    % RunNetflix.py < RunNetflix.in > RunNetflix.out
+    % CacheNetflix.py < <>.txt > <>.txt
 """
 
 custNum = 2649429
@@ -25,6 +25,8 @@ custNum = 2649429
 
 
 AvgCustRating_Netflix(sys.stdin, sys.stdout)
+
+
 
 
 # ----
@@ -74,19 +76,17 @@ def AvgCustRating_Print (w, custTotalArray, custNumArray):
     """
     assert len(custTotalArray) == custNum
     assert len(custNumArray) == custNum
-    
-    for i in range(custNum) :
-        
-        # if the custID ranked something, calculate the average
-        if custTotalArray[i] > 0 and custNumArray[i] > 0 :
-            
-            custID = i + 1
 
-            # Last Line Case
-            if i == custNum-1 :
-                w.write(str(custID) + "," + str(round(custTotalArray[i]/custNumArray[i]))
-            else:
-                w.write(str(custID) + "," + str(round(custTotalArray[i]/custNumArray[i]) + "\n")
+    # If custID hasn't rated anything, print anyways
+    for i in range(custNum) :
+
+        custID = i + 1
+
+        # Last Line Case
+        if i == custNum-1 :
+            w.write(str(custID) + "," + str(round(custTotalArray[i]/custNumArray[i]))
+        else:
+            w.write(str(custID) + "," + str(round(custTotalArray[i]/custNumArray[i]) + "\n")
 # ----
 # cache_read
 # ----
