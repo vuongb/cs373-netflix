@@ -53,10 +53,11 @@ def print_output():
 read_avg_customer_cache()
 read_avg_movie_cache()
 
-# read in movie id
-    #read in cust_id
-    #compute estimated
-    #compute
+for line in open("probeData.txt"):
+    ratings[..] = predict(line, ..., ..., ..., ...) // or "line" alone
+rmse = computeRmse(open("probeAnswers.txt"), ratings)
+
+
 
     compute_estimated_rating(avg_customer_rating, avg_movie_rating)
 compute_rmse()
