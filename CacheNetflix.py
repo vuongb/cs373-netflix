@@ -54,31 +54,6 @@ def avg_customer_rating(input) :
         custNumArray[custIDIndex] += 1
         a = []
 
-    
-## ----
-## AvgCustRating_Print
-## ----
-#def AvgCustRating_Print (w, custTotalArray, custNumArray):
-#
-#    """
-#    loop through arrays, calculate average, write
-#    w is a writer
-#    custTotalArray is an array with the sums of all the ratings for a custID (array indexes are the custID - 1)
-#    custNumArray is an array of the number of times a custID did a rating (array indexes are the custID - 1)
-#    """
-#    assert len(custTotalArray) == custNum
-#    assert len(custNumArray) == custNum
-#
-#    # If custID hasn't rated anything, print anyways
-#    for i in range(custNum) :
-#
-#        custID = i + 1
-#
-#        # Last Line Case
-#        if i == custNum-1 :
-#            w.write(str(custID) + "," + str(round(custTotalArray[i]/custNumArray[i])))
-#        else:
-
 # ----
 # cache_read
 # ----
@@ -155,7 +130,26 @@ def read_training_data_avgcust():
         if custNumArray[i] != 0:
             output.write(str(custID) + ":" + str(int(round(custTotalArray[i]/custNumArray[i]))) + "\n")
         print i
+    output.close()
 
+def build_probe_answers():
+    import glob
+    output = open("probeAnswers.txt","w")
+    x = 0
+    for f in glob.glob("../training_data/*.txt"):
+        input = open(f)
+        movie_id = input.readline()
+        if movie_id:
+            output.write(movie_id)
+            while True:
+                values = input.readline().split(",")
+                if values == ['']:
+                    break
+                customer_rating = values[1]
+                output.write(customer_rating + "\n")          # write movieid and ratings for each cust
+        input.close()
+        print x
+        x += 1
     output.close()
 
 # ----
@@ -163,8 +157,5 @@ def read_training_data_avgcust():
 # ----
 
 #read_training_data_avgmovie()
-
-read_training_data_avgcust()
-
-#AvgCustRating_Netflix(sys.stdin, sys.stdout)
-
+#read_training_data_avgcust()
+build_probe_answers()
