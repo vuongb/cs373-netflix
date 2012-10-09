@@ -17,7 +17,7 @@ To run the program
     % CacheNetflix.py < <>.txt > <>.txt
 """
 
-import sys
+import glob
 
 custNum = 2649429
 custTotalArray = [0] * custNum
@@ -132,24 +132,22 @@ def read_training_data_avgcust():
         print i
     output.close()
 
+
+
+
 def build_probe_answers():
 
-    MOVIE_NUM = 17770
-    CUST_NUM = 480189
-    
-    import glob
-    MovieCustArray = [ [] ] * (MOVIE_NUM + 1)
-    outputFile = open('probeEstimated.txt', 'w')
+    # Read in probeData.txt and get customers that have ratings for given movieIDs
+    # Build a List of Lists where Outer list indicies == movieID and Inner list are customerIDs
+    # aka adjacency list
+    MOVIE_NUM       = 17770
+    MovieCustArray  = [ [] ] * (MOVIE_NUM + 1)
+    movieID         = -1
+    custID          = -1
+    a               = []
+    print "Reading from probeData.txt"
     inputFile = open("data/probeData.txt", "r")
-
-    movieID = -1
-    custID = -1
-    a = []
-
-    # Read in each line
-    # Build a List of Lists
-    # Every element of the Outer List, is an Inner List of the CustIDs for every MovieID
-    for line in open(inputFile):
+    for line in inputFile:
         if line == "\n":
             break
         elif ":" in line :
@@ -162,21 +160,28 @@ def build_probe_answers():
             a.append(custID)
     if len(a) != 0 :
         MovieCustArray[movieID] = a
-
+    print "Done reading from probeData.txt"
     inputFile.close()
-    
-    # Go through training data and get ratings
+    print
+
+    # Go through training data and get ratings by referencing customerID
+    print "Parsing ratings from training data."
     MovieCustOutput = [ [] ] * (MOVIE_NUM + 1)
     movieID = -1
     custID = -1
+    x = 0
     for f in glob.glob("../training_data/*.txt"):
         inputFile = open(f)
-        for line in open(inputFile) :
-            if line == "\n" :
+        print "parsing file " + str(x)
+        x += 1
+        if x > 100:         # TODO: remove. Only used to test small dataset.
+            break
+        for line in inputFile :
+            if line == "\n" : # if EOF
                 break
-            elif ":" in line :
-                movieID = int(input.readline().rstrip(':\n'))
-                if len(MovieCustArray[movieID]) == 0 :      # means you don't care about the ratings for this movie
+            elif ":" in line : # if line is a movieID
+                movieID = int(line.rstrip(':\n'))
+                if len(MovieCustArray[movieID]) == 0 : # means you don't care about the ratings for this movie
                     break
             else:
                 l = line.rstrip('\n').split(',')
@@ -185,35 +190,20 @@ def build_probe_answers():
                 if custID in MovieCustArray[movieID] :
                     tup = (custID, custRating)
                     MovieCustOutput[movieID].append(tup)
-        f.close()
+        inputFile.close()
+    print "Done reading training data."
+    print
 
     # Write all movies and their customers and ratings to output file
+    print "Writing output file."
+    outputFile = open('probeEstimated.txt', 'w')
     for movieNum in range(1, (MOVIE_NUM + 1)) :
         if len(MovieCustOutput[movieNum]) != 0 :
-            outputFile.write(str(movieNum) + "\n")
-            for u,v in MovieCustOutput[movieNum] :
+            outputFile.write(str(movieNum) + "\n") #TODO: add a colon after movieID
+            for u,v in MovieCustOutput[movieNum] : #TODO: raname these variables to something more descriptive
                 outputFile.write(str(v) + "\n")
-            
-    
-
     outputFile.close()
-##    output = open("caches/probeAnswers.txt","w")
-##    x = 0
-##    for f in glob.glob("../training_data/*.txt"):
-##        input = open(f)
-##        movie_id = input.readline()
-##        if movie_id:
-##            output.write(movie_id)
-##            while True:
-##                values = input.readline().split(",")
-##                if values == ['']:
-##                    break
-##                customer_rating = values[1]
-##                output.write(customer_rating + "\n")          # write movieid and ratings for each cust
-##        input.close()
-##        print x
-##        x += 1
-##    output.close()
+    print "Done printing output."
 
 # ----
 # main
