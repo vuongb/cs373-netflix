@@ -133,24 +133,87 @@ def read_training_data_avgcust():
     output.close()
 
 def build_probe_answers():
+
+    MOVIE_NUM = 17770
+    CUST_NUM = 480189
+    
     import glob
-    output = open("caches/probeAnswers.txt","w")
-    x = 0
+    MovieCustArray = [ [] ] * (MOVIE_NUM + 1)
+    outputFile = open('probeEstimated.txt', 'w')
+    inputFile = open("data/probeData.txt", "r")
+
+    movieID = -1
+    custID = -1
+    a = []
+
+    # Read in each line
+    # Build a List of Lists
+    # Every element of the Outer List, is an Inner List of the CustIDs for every MovieID
+    for line in open(inputFile):
+        if line == "\n":
+            break
+        elif ":" in line :
+            movieID = int(line.rstrip(':\n'))
+            if len(a) != 0 :
+                MovieCustArray[movieID] = a
+                a = []
+        else :
+            custID = int(line.rstrip('\n'))
+            a.append(custID)
+    if len(a) != 0 :
+        MovieCustArray[movieID] = a
+
+    inputFile.close()
+    
+    # Go through training data and get ratings
+    MovieCustOutput = [ [] ] * (MOVIE_NUM + 1)
+    movieID = -1
+    custID = -1
     for f in glob.glob("../training_data/*.txt"):
-        input = open(f)
-        movie_id = input.readline()
-        if movie_id:
-            output.write(movie_id)
-            while True:
-                values = input.readline().split(",")
-                if values == ['']:
+        inputFile = open(f)
+        for line in open(inputFile) :
+            if line == "\n" :
+                break
+            elif ":" in line :
+                movieID = int(input.readline().rstrip(':\n'))
+                if len(MovieCustArray[movieID]) == 0 :      # means you don't care about the ratings for this movie
                     break
-                customer_rating = values[1]
-                output.write(customer_rating + "\n")          # write movieid and ratings for each cust
-        input.close()
-        print x
-        x += 1
-    output.close()
+            else:
+                l = line.rstrip('\n').split(',')
+                custID = l[0]
+                custRating = l[1]
+                if custID in MovieCustArray[movieID] :
+                    tup = (custID, custRating)
+                    MovieCustOutput[movieID].append(tup)
+        f.close()
+
+    # Write all movies and their customers and ratings to output file
+    for movieNum in range(1, (MOVIE_NUM + 1)) :
+        if len(MovieCustOutput[movieNum]) != 0 :
+            outputFile.write(str(movieNum) + "\n")
+            for u,v in MovieCustOutput[movieNum] :
+                outputFile.write(str(v) + "\n")
+            
+    
+
+    outputFile.close()
+##    output = open("caches/probeAnswers.txt","w")
+##    x = 0
+##    for f in glob.glob("../training_data/*.txt"):
+##        input = open(f)
+##        movie_id = input.readline()
+##        if movie_id:
+##            output.write(movie_id)
+##            while True:
+##                values = input.readline().split(",")
+##                if values == ['']:
+##                    break
+##                customer_rating = values[1]
+##                output.write(customer_rating + "\n")          # write movieid and ratings for each cust
+##        input.close()
+##        print x
+##        x += 1
+##    output.close()
 
 # ----
 # main
