@@ -13,38 +13,45 @@
 
 CUSTNUM                 = 2649429
 MOVIENUM                = 17770
-customer_rating_cache   = [0]*CUSTNUM + 1
-movie_rating_cache      = [0]*MOVIENUM + 1
+customer_rating_cache   = [0]*(CUSTNUM + 1)
+movie_rating_cache      = [0]*(MOVIENUM + 1)
 
 
 def read_avg_movie_cache():
-    input           = open("avg_movie_rating.out", "r")
+    input           = open("caches/avg_movie_rating.out", "r")
     while True:
-        data        = input.readline().rstrip('\n').split(":")  # remove EOL characters and split into a data list
+        data       = input.readline().strip('\n')# remove EOL characters
         if data == "":  # if EOF
             break
-        movie_id    = int(data[0])
-        movie_rating= int(data[1])
-        movie_rating_cache[movie_id] = movie_rating     # Build our indexable cache
+        else:
+            data    = data.split(':')  #split into a data list
+            movie_id    = int(data[0])
+            movie_rating= int(data[1])
+            movie_rating_cache[movie_id] = movie_rating     # Build our indexable cache
+    print "Read movie cache."
     input.close()
 
 def read_avg_customer_cache():
-    input           = open("avg_customer_rating.out", "r")
+    input           = open("caches/avg_customer_rating.out", "r")
+    x = 0
     while True:
-        data        = input.readline().rstrip('\n').split(":")  # remove EOL characters and split into a data list
+        data       = input.readline().strip('\n')# remove EOL characters
         if data == "":  # if EOF
             break
-        customer_id = int(data[0])
-        movie_rating= int(data[1])
-        movie_rating_cache[customer_id] = movie_rating     # Build our indexable cache
+        else:
+            data    = data.split(':')  #split into a data list
+            customer_id = int(data[0])
+            movie_rating= int(data[1])
+            customer_rating_cache[customer_id] = movie_rating     # Build our indexable cache
+        print x
+        x +=1
+    print "Read customer cache."
     input.close()
 
 def compute_estimated_rating(avg_customer_rating, avg_movie_rating):
     return ((avg_customer_rating*1.0) + avg_movie_rating)/2     # Average the avg_cust_rating and avg_movie_rating (formatted to float)
 
-def compute_rmse():
-
-def print_output():
+#def print_output():
 
 
 # Main
@@ -53,12 +60,24 @@ def print_output():
 read_avg_customer_cache()
 read_avg_movie_cache()
 
-for line in open("probeData.txt"):
-    ratings[..] = predict(line, ..., ..., ..., ...) // or "line" alone
-rmse = computeRmse(open("probeAnswers.txt"), ratings)
+movieID = -1
+custID = -1
 
 
+output = open('probeEstimated.txt', 'w')
 
-    compute_estimated_rating(avg_customer_rating, avg_movie_rating)
-compute_rmse()
-print_output()
+for line in open("data/probeData.txt", "r"):
+    if line == "\n" :
+        break
+    elif ":" in line :
+        movieID = int(line.rstrip(':\n'))
+        output.write(str(movieID) + ":\n")
+    else :
+        custID = int(line.rstrip('\n'))
+        estimated_rating = compute_estimated_rating(customer_rating_cache[custID], movie_rating_cache[movieID])
+        s = "%.1f" % estimated_rating
+        output.write(s + "\n")
+#rmse = computeRmse(open("data/probeAnswers.txt"), ratings)
+
+
+#print_output()

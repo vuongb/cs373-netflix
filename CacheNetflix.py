@@ -134,7 +134,7 @@ def read_training_data_avgcust():
 
 def build_probe_answers():
     import glob
-    output = open("probeAnswers.txt","w")
+    output = open("caches/probeAnswers.txt","w")
     x = 0
     for f in glob.glob("../training_data/*.txt"):
         input = open(f)
