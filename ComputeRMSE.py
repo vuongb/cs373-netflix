@@ -19,7 +19,7 @@ def computeRMSE(probeAnswers, probeEstimate) :
     return math.sqrt(sum/count)
 
 # Compute the RMSE
-probeEstimated = open('ProbeEstimated.txt', 'r')
+probeEstimated = open('data/probeEstimated.txt', 'r')
 probeAnswers = open("data/ProbeAnswers.txt", 'r')
 print computeRMSE(probeAnswers, probeEstimated)
 probeAnswers.close()

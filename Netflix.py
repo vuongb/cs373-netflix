@@ -41,13 +41,16 @@ def read_avg_customer_cache(input, size):
 
     return customer_rating_cache
 
+
 def compute_estimated_rating(avg_customer_rating, avg_movie_rating):
-    return ((avg_customer_rating*1.0) + avg_movie_rating)/2     # Average the avg_cust_rating and avg_movie_rating (formatted to float)
+    if avg_customer_rating != 0 :
+        return ((avg_customer_rating*1.0) + avg_movie_rating)/2     # Average the avg_cust_rating and avg_movie_rating (formatted to float)
+    else :
+        return avg_movie_rating                                     # If no average customer rating, then just give movie recommendation
 
 
 def square_diff (x, y) :
     return (x - y) ** 2
-
 
 
 # Main
@@ -58,6 +61,7 @@ def Netflix_solve(r, w) :
     input               = open("caches/avg_movie_rating.out", "r")
     avg_movie_cache     = read_avg_movie_cache(input, MOVIENUM + 1)
     input.close()
+
     input               = open("caches/avg_customer_rating.out", "r")
     avg_customer_cache  = read_avg_customer_cache(input, CUSTNUM + 1)
     input.close()
@@ -76,18 +80,12 @@ def Netflix_solve(r, w) :
             output.write(str(movieID) + ":\n")
         else :
             custID = int(line.rstrip('\n'))
-
-            print "customer rating  : " + str(avg_customer_cache[custID])
-            print "movie rating     : " + str(avg_movie_cache[movieID])
+#            print "customer rating  : " + str(avg_customer_cache[custID])
+#            print "movie rating     : " + str(avg_movie_cache[movieID])
             estimated_rating = compute_estimated_rating(avg_customer_cache[custID], avg_movie_cache[movieID])
-            print "estimated rating : " + str(estimated_rating)
-            print 
+#            print "estimated rating : " + str(estimated_rating)
             s = "%.1f" % estimated_rating
             output.write(s + "\n")
     output.close()
-
-
-
-
 
 
