@@ -253,7 +253,6 @@ def build_decade_dict():
                 if not decade_list:     # if the customer isn't in the dictionary, intitialize decade_list
                     decade_list = [ [0,0]  for i in range(11)]
                     decade_dict[customerID] = decade_list
-                    decade_dict[customerID] = decade_list
                 decade_list[decade][0] += rating        # cumulative sum
                 decade_list[decade][1] += 1             # of ratings
         input.close()
