@@ -95,38 +95,35 @@ def square_diff (x, y) :
 
 
 # Main
+CUSTNUM                 = 2649429
+MOVIENUM                = 17770
 def Netflix_solve(r, w) :
-    CUSTNUM                 = 2649429
-    MOVIENUM                = 17770
-
     input               = open("caches/avg_movie_rating.out", "r")
     avg_movie_cache     = read_avg_movie_cache(input, MOVIENUM + 1)
     input.close()
-
     input               = open("caches/avg_customer_rating.out", "r")
     avg_customer_cache  = read_avg_customer_cache(input, CUSTNUM + 1)
     input.close()
-
-    movieID = -1
-
-    #output = open('probeEstimated.txt', 'w')
     output = w
 
-    #for line in open("data/probeData.txt", "r"):
-    for line in r:
-        if line == "\n" :
+    while True:
+        movieID = -1
+        line = r.readline()
+        while line and line != "\n":    # while it's not the EOF and not EOL
+            if ":" in line :
+                movieID = int(line.rstrip(':\n'))
+                output.write(str(movieID) + ":\n")
+            else :
+                custID = int(line.rstrip('\n'))
+                estimated_rating = compute_estimated_rating(avg_customer_cache[custID], avg_movie_cache[movieID])
+                s = "%.1f" % estimated_rating
+                output.write(s + "\n")
+            line = r.readline()
+        if line == "\n":        # separate individual tests with blank lines
+            output.write("\n")
+        if not line:            # check for EOF
             break
-        elif ":" in line :
-            movieID = int(line.rstrip(':\n'))
-            output.write(str(movieID) + ":\n")
-        else :
-            custID = int(line.rstrip('\n'))
-#            print "customer rating  : " + str(avg_customer_cache[custID])
-#            print "movie rating     : " + str(avg_movie_cache[movieID])
-            estimated_rating = compute_estimated_rating(avg_customer_cache[custID], avg_movie_cache[movieID])
-#            print "estimated rating : " + str(estimated_rating)
-            s = "%.1f" % estimated_rating
-            output.write(s + "\n")
+
     output.close()
 
 
