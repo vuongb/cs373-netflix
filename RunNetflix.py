@@ -26,7 +26,7 @@ To document the program
 
 import sys
 
-from Netflix import Netflix_solve
+from Netflix import read_avg_movie_cache,
 
 # ----
 # main

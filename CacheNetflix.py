@@ -141,32 +141,32 @@ def build_probe_answers():
     # Build a List of Lists where Outer list indicies == movieID and Inner list are customerIDs
     # aka adjacency list
     MOVIE_NUM       = 17770
-    MovieCustArray  = [ [] ] * (MOVIE_NUM + 1)
+    MovieCustArray  = [ []  for i in range(MOVIE_NUM + 1)]
+    MovieOrder      = []
     movieID         = -1
     custID          = -1
     a               = []
     print "Reading from probeData.txt"
     inputFile = open("data/probeData.txt", "r")
-    for line in inputFile:
+    for line in inputFile :
         if line == "\n":
             break
         elif ":" in line :
-            movieID = int(line.rstrip(':\n'))
-            if len(a) != 0 :
+            if movieID != -1 :
                 MovieCustArray[movieID] = a
                 a = []
+            movieID = int(line.rstrip(':\n'))
+            MovieOrder.append(movieID)
         else :
             custID = int(line.rstrip('\n'))
             a.append(custID)
-    if len(a) != 0 :
-        MovieCustArray[movieID] = a
     print "Done reading from probeData.txt"
     inputFile.close()
     print
 
     # Go through training data and get ratings by referencing customerID
     print "Parsing ratings from training data."
-    MovieCustOutput = [ [] ] * (MOVIE_NUM + 1)
+    MovieCustOutput = [ []  for i in range(MOVIE_NUM + 1)]
     movieID = -1
     custID = -1
     x = 0
@@ -174,8 +174,8 @@ def build_probe_answers():
         inputFile = open(f)
         print "parsing file " + str(x)
         x += 1
-        if x > 100:         # TODO: remove. Only used to test small dataset.
-            break
+#        if x > 500:         # TODO: remove. Only used to test small dataset.
+#            break
         for line in inputFile :
             if line == "\n" : # if EOF
                 break
@@ -183,26 +183,32 @@ def build_probe_answers():
                 movieID = int(line.rstrip(':\n'))
                 if len(MovieCustArray[movieID]) == 0 : # means you don't care about the ratings for this movie
                     break
-            else:
+            else:   # else it's a customerID
                 l = line.rstrip('\n').split(',')
-                custID = l[0]
-                custRating = l[1]
+                custID = int(l[0])
+                custRating = int(l[1])
                 if custID in MovieCustArray[movieID] :
                     tup = (custID, custRating)
                     MovieCustOutput[movieID].append(tup)
         inputFile.close()
-    print "Done reading training data."
+    print "Done parsing training data."
     print
 
     # Write all movies and their customers and ratings to output file
     print "Writing output file."
-    outputFile = open('probeEstimated.txt', 'w')
-    for movieNum in range(1, (MOVIE_NUM + 1)) :
-        if len(MovieCustOutput[movieNum]) != 0 :
-            outputFile.write(str(movieNum) + "\n") #TODO: add a colon after movieID
-            for u,v in MovieCustOutput[movieNum] : #TODO: raname these variables to something more descriptive
-                outputFile.write(str(v) + "\n")
+    outputFile = open('data/probeAnswers.txt', 'w')
+    for movieNum in MovieOrder :
+
+            outputFile.write(str(movieNum) + ":\n") # write the movieID
+
+            for customer in MovieCustArray[movieNum] :
+                #tupleIndex = [x[0] for x in MovieCustOutput[movieNum]].index(custID)
+                custRating = dict(MovieCustOutput[movieNum])[customer]
+                outputFile.write(str(customer) + ", " + str(custRating) + "\n")
+
+
     outputFile.close()
+
     print "Done printing output."
 
 # ----
