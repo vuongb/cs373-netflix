@@ -136,7 +136,6 @@ def read_training_data_avgcust():
 
 
 def build_probe_answers():
-
     # Read in probeData.txt and get customers that have ratings for given movieIDs
     # Build a List of Lists where Outer list indicies == movieID and Inner list are customerIDs
     # aka adjacency list
@@ -208,13 +207,118 @@ def build_probe_answers():
 
 
     outputFile.close()
-
     print "Done printing output."
+
+movie_titles_dict = {}
+def build_movie_titles_dict():
+    global movie_titles_dict
+    r = open('data/movie_titles.txt', 'r')
+    while True:
+        line = r.readline().rstrip('\n')
+        if line == '':
+            break
+        else:
+            data = line.split(',')
+            movieID = int(data[0])
+            if data[1] != 'NULL':       # Some movie years are null
+                movieYear = int(data[1])    # doesn't account for multiple movie years, but there's not many of them so whatever
+                movie_titles_dict[movieID] = movieYear
+    r.close()
+    return movie_titles_dict
+
+decade_dict = {}
+def build_decade_dict():
+    global decade_dict
+    x = 0
+    decade = -1
+    for file in glob.glob("../training_data/*.txt"):
+        input = open(file)
+        print "parsing file " + str(x)
+        x += 1
+        # if x > 10: # TODO: remove after testing
+        #     break
+        for line in input:
+            if line == "\n":
+                break
+            elif ':' in line:   # if it's a movieID
+                movieID = int(line.rstrip(':\n'))
+                movieYear = movie_titles_dict.get(movieID)  # looks up year of movie from movie_titles_dict
+                decade = get_year_index_helper(movieYear)
+            else:   # else its a rating set
+                data = line.rstrip('\n')
+                data = data.split(",")  # [customerID, rating, ratingDate]
+                customerID = int(data[0])
+                rating = int(data[1])
+                decade_list = decade_dict.get(customerID)
+                if not decade_list:     # if the customer isn't in the dictionary, intitialize decade_list
+                    decade_list = [ [0,0]  for i in range(11)]
+                    decade_dict[customerID] = decade_list
+                    decade_dict[customerID] = decade_list
+                decade_list[decade][0] += rating        # cumulative sum
+                decade_list[decade][1] += 1             # of ratings
+        input.close()
+
+
+def get_year_index_helper(movieYear):
+    result = -1
+    if movieYear < 1909:
+        result = 0
+    elif movieYear >= 1910 and movieYear <= 1919:
+        result = 1
+    elif movieYear >= 1920 and movieYear <= 1929:
+        result = 2
+    elif movieYear >= 1930 and movieYear <= 1939:
+        result = 3
+    elif movieYear >= 1940 and movieYear <= 1949:
+        result = 4
+    elif movieYear >= 1950 and movieYear <= 1959:
+        result = 5
+    elif movieYear >= 1960 and movieYear <= 1969:
+        result = 6
+    elif movieYear >= 1970 and movieYear <= 1979:
+        result = 7
+    elif movieYear >= 1980 and movieYear <= 1989:
+        result = 8
+    elif movieYear >= 1990 and movieYear <= 1999:
+        result = 9
+    elif movieYear >= 2000:
+        result = 10
+
+    if result == -1:        # TODO: better error handling, hopefully this never happens
+        result = 0
+
+    return result
+
+
+def print_decade_dict():
+    global decade_dict
+    output = open("caches/customer_decade_rating.out", "w")
+    for key in decade_dict.keys():
+        decade_list = decade_dict.get(key)
+        output_list = []
+        index = 0
+        for decade_data in decade_list:
+            if decade_data[1] != 0:
+                average = float(decade_data[0])/decade_data[1]
+                output_list.append([index, average])
+            index +=1
+        if output_list != []:               # only print out the customers who have ratings, and only the decades they've rated int
+            output.write( str(key) + ':\n')
+            for data in output_list:
+                output.write(str(data[0]) + ',' + str(data[1]) + '\n')
+    output.close()
+
 
 # ----
 # main
 # ----
 
 #read_training_data_avgmovie()
+
 #read_training_data_avgcust()
+
 #build_probe_answers()
+
+build_movie_titles_dict()
+build_decade_dict()
+print_decade_dict()
