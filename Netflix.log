@@ -1,0 +1,147 @@
+commit d35cfc987ce51a01e1e7764d143a5aded08bc603
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Oct 10 17:08:26 2012 -0500
+
+    Done.
+
+commit a40039e0c18c645db79dda7459929dd426a4b0d5
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Oct 10 15:40:40 2012 -0500
+
+    RMSE of 0.994! 1337 w00t
+
+commit f56666989914eb6b43376fe0f0a592174a5d0009
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Oct 10 12:21:03 2012 -0500
+
+    Wrote a couple lines to read in decade cache. Not finished
+
+commit c1564192f15b0d3412ba5f5816bff1b580c4695b
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Oct 10 12:15:13 2012 -0500
+
+    Built and added a new decade cache. Fixes #21
+
+commit c1f60197fe1d489cde568a34f7900c04ac98bd07
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Oct 10 03:06:11 2012 -0500
+
+    Computed RMSE with correct caches and generated probeAnswers.txt. Also generated acceptancetests. Fixes #4, Fixes #14, Fixes #16, Fixes #18
+
+commit 463a5a66c9bd2ed6c7f00cb0f3d050d05afd2f30
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Oct 10 01:57:31 2012 -0500
+
+    Played around with RMSE weights
+
+commit dbeda835560525b2bc820476b9cd4343e36131f6
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Oct 10 01:03:29 2012 -0500
+
+    RMSE of 1.15
+
+commit 4f059b1775f77662858622052c3f6001a1f2091b
+Author: Bryan Vuong <vuong.bryan@gmail.com>
+Date:   Wed Oct 10 00:39:48 2012 -0500
+
+    Fixing Average Customer Cache
+
+commit 7aad5ecb0e105236a11afaf94966288287524e0c
+Author: Bryan Vuong <vuong.bryan@gmail.com>
+Date:   Wed Oct 10 00:31:57 2012 -0500
+
+    Fixed Errors with Average Movie Cache
+
+commit f15963b66dc1d66ac49b5dd0826851a0ae137d5f
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Tue Oct 9 23:44:26 2012 -0500
+
+    Changes after leaving the PCL
+
+commit 3219f015bdc5adc39539e8136445ef47e3b97fac
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Tue Oct 9 21:14:11 2012 -0500
+
+    Attempted to generate probeAnswers.txt, added all unit tests. Fixes #3
+
+commit cc874f6c6a4f14f3b30d22ee83d0b859a5a21bfd
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Tue Oct 9 14:53:05 2012 -0500
+
+    Sqashed bugs in build_probe_answers. It's still not working. Nothing getting added to MovieCustOutput[].
+
+commit 6d24bf2a16ce83a19303acc9010dfe88b5e57dc4
+Author: Bryan Vuong <vuong.bryan@gmail.com>
+Date:   Tue Oct 9 02:50:13 2012 -0500
+
+    Added methods to generate ProbeAnswers.txt
+    
+    located in CacheNetflix.py
+
+commit 261a348baf328d0870a944c800069d08d14aaf22
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Tue Oct 9 02:02:46 2012 -0500
+
+    Crushing code at 2am.
+
+commit a428cec860e36b3209162d0bf929ccf59b4b7436
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Mon Oct 8 12:09:53 2012 -0500
+
+    included TAs code snippet
+
+commit b56dbfce81596028f85b9ac9718510e33d8943bf
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Mon Oct 8 11:42:59 2012 -0500
+
+    put caches in caches folder
+
+commit fa167b3e8926165de0e958702ddd2c25064eb4de
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Mon Oct 8 11:28:00 2012 -0500
+
+    Generated probeAnswers.txt
+
+commit 8be8bd7856b61840881a06dfac25e7d821ecab4d
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Sun Oct 7 13:16:02 2012 -0500
+
+    Built caches for avg_cust rating and avg_movie rating.
+
+commit ddbc5021c2ab2708ceb3839a06d81751f1578150
+Author: Bryan Vuong <vuong.bryan@gmail.com>
+Date:   Sat Oct 6 02:13:43 2012 -0500
+
+    Changed input instructions for CacheNetflix.py
+
+commit 341af5c62c291b05377cabe1887596cf5d33136f
+Author: Bryan Vuong <vuong.bryan@gmail.com>
+Date:   Sat Oct 6 01:52:09 2012 -0500
+
+    Added "Average Customer Rating" cache
+    
+    Haven't tested yet
+
+commit fe3963bec31a4e2118a2efa6bc8937bcb73ecad0
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Tue Oct 2 21:03:56 2012 -0500
+
+    Initialized more required files (but not all) and tested TestNetflix.py. Fixes #9
+
+commit 7476f54c5af08816b95b9f8aa2fc00f812e030b1
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Tue Oct 2 20:46:01 2012 -0500
+
+    Added directories /data and /caches and moved files accordingly. Fixes #8
+
+commit 4f20d5516f14662cafb5d0cdc870c9a6947e4ace
+Author: Bryan Vuong <vuong.bryan@gmail.com>
+Date:   Tue Oct 2 14:41:40 2012 -0500
+
+    Added files and README
+
+commit 858439e297a9de424a466660a037b78ec266a2bd
+Author: Bryan Vuong <vuong.bryan@gmail.com>
+Date:   Tue Oct 2 10:33:31 2012 -0700
+
+    Initial commit

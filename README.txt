@@ -9,16 +9,16 @@ Last Name: Vuong
 EID: bkv85
 E-mail: vuong.bryan@gmail.com
 Estimated number of hours: 12
-Actual    number of hours:
+Actual    number of hours: 20
 
 Partner First Name: Ryan
 Partner Last Name: Prater
 Partner EID: rp22566
 Partner E-mail: ryanprater@utexas.edu
 Partner Estimated number of hours: 10
-Partner Actual    number of hours:
+Partner Actual    number of hours: 20
 
-Turnin CS Username:
+Turnin CS Username: rprater
 GitHub ID: vuongb
 GitHub Repository Name: cs373-netflix
 

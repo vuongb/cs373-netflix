@@ -1,0 +1,63 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Netflix</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Netflix</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/ryan/Dev/Code/software-engr/project3-netflix/Netflix.py">/home/ryan/Dev/Code/software-engr/project3-netflix/Netflix.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;---------------------------<br>
+#&nbsp;Name&nbsp;&nbsp;:&nbsp;Ryan&nbsp;J.&nbsp;Prater<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Bryan&nbsp;Vuong<br>
+#&nbsp;EID&nbsp;&nbsp;&nbsp;:&nbsp;rp22566<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;bkv85<br>
+#&nbsp;CSID&nbsp;&nbsp;:&nbsp;rprater<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<br>
+#&nbsp;CS373&nbsp;-&nbsp;Downing&nbsp;-&nbsp;Project&nbsp;#3&nbsp;-&nbsp;Netflix<br>
+#&nbsp;---------------------------</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-Netflix_solve"><strong>Netflix_solve</strong></a>(r, w)</dt><dd><tt>r&nbsp;is&nbsp;a&nbsp;stdin&nbsp;file&nbsp;that&nbsp;specifies&nbsp;the&nbsp;movieIDs&nbsp;and&nbsp;custIDs&nbsp;ratings&nbsp;that&nbsp;are&nbsp;requested<br>
+w&nbsp;is&nbsp;a&nbsp;stdout&nbsp;file&nbsp;for&nbsp;where&nbsp;the&nbsp;recommended&nbsp;ratings&nbsp;are&nbsp;printed<br>
+Gives&nbsp;recommended&nbsp;ratings&nbsp;for&nbsp;movieIDs&nbsp;and&nbsp;custIDs&nbsp;specified&nbsp;in&nbsp;r</tt></dd></dl>
+ <dl><dt><a name="-build_movie_titles_dict"><strong>build_movie_titles_dict</strong></a>(input)</dt><dd><tt>input&nbsp;is&nbsp;the&nbsp;movie&nbsp;title&nbsp;decade&nbsp;cache&nbsp;file<br>
+builds&nbsp;a&nbsp;cache&nbsp;of&nbsp;what&nbsp;decade&nbsp;each&nbsp;movie&nbsp;was&nbsp;in<br>
+returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;movieIDs&nbsp;(keys)&nbsp;and&nbsp;movieYears&nbsp;(values)</tt></dd></dl>
+ <dl><dt><a name="-compute_estimated_rating"><strong>compute_estimated_rating</strong></a>(avg_customer_rating, avg_movie_rating, decade_rating)</dt><dd><tt>avg_customer_rating&nbsp;is&nbsp;the&nbsp;customer's&nbsp;average&nbsp;rating<br>
+avg_movie_rating&nbsp;is&nbsp;the&nbsp;movie's&nbsp;average&nbsp;rating<br>
+decade_rating&nbsp;is&nbsp;the&nbsp;customer's&nbsp;average&nbsp;decade&nbsp;rating&nbsp;(highest&nbsp;weight)<br>
+returns&nbsp;the&nbsp;algorithm's&nbsp;estimated&nbsp;rating&nbsp;based&nbsp;on&nbsp;weights</tt></dd></dl>
+ <dl><dt><a name="-get_year_index_helper"><strong>get_year_index_helper</strong></a>(movieYear)</dt><dd><tt>movieYear&nbsp;is&nbsp;the&nbsp;year&nbsp;the&nbsp;movie&nbsp;was&nbsp;released<br>
+returns&nbsp;the&nbsp;index&nbsp;in&nbsp;decade_dict&nbsp;where&nbsp;the&nbsp;movie&nbsp;is&nbsp;cached</tt></dd></dl>
+ <dl><dt><a name="-read_avg_customer_cache"><strong>read_avg_customer_cache</strong></a>(input, size)</dt><dd><tt>input&nbsp;is&nbsp;the&nbsp;customer&nbsp;cache&nbsp;file<br>
+size&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;customers<br>
+builds&nbsp;a&nbsp;cache&nbsp;of&nbsp;avg&nbsp;ratings&nbsp;per&nbsp;customer<br>
+returns&nbsp;a&nbsp;list&nbsp;of&nbsp;average&nbsp;customer&nbsp;ratings&nbsp;where&nbsp;the&nbsp;customer&nbsp;IDs&nbsp;are&nbsp;indexes</tt></dd></dl>
+ <dl><dt><a name="-read_avg_movie_cache"><strong>read_avg_movie_cache</strong></a>(input, size)</dt><dd><tt>input&nbsp;is&nbsp;the&nbsp;movie&nbsp;cache&nbsp;file<br>
+size&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;movies<br>
+builds&nbsp;a&nbsp;cache&nbsp;of&nbsp;avg&nbsp;ratings&nbsp;per&nbsp;movie<br>
+returns&nbsp;a&nbsp;list&nbsp;of&nbsp;average&nbsp;movie&nbsp;ratings&nbsp;where&nbsp;the&nbsp;movie&nbsp;IDs&nbsp;are&nbsp;indexes</tt></dd></dl>
+ <dl><dt><a name="-read_decade_cache"><strong>read_decade_cache</strong></a>(input)</dt><dd><tt>input&nbsp;is&nbsp;the&nbsp;decade&nbsp;cache&nbsp;file<br>
+builds&nbsp;a&nbsp;cache&nbsp;of&nbsp;avg&nbsp;customer&nbsp;ratings&nbsp;per&nbsp;decade<br>
+returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;customer&nbsp;ratings&nbsp;(keys)&nbsp;and&nbsp;rating&nbsp;lists&nbsp;(values)</tt></dd></dl>
+ <dl><dt><a name="-square_diff"><strong>square_diff</strong></a>(x, y)</dt><dd><tt>x&nbsp;is&nbsp;a&nbsp;real&nbsp;number<br>
+y&nbsp;is&nbsp;a&nbsp;real&nbsp;number<br>
+returns&nbsp;the&nbsp;square&nbsp;difference&nbsp;between&nbsp;x&nbsp;and&nbsp;y</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>CUSTNUM</strong> = 2649429<br>
+<strong>MOVIENUM</strong> = 17770</td></tr></table>
+</body></html>
