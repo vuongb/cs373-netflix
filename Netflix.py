@@ -23,8 +23,7 @@ def read_avg_movie_cache(input, size):
             movie_id    = int(data[0])
             movie_rating= int(data[1])
             movie_rating_cache[movie_id] = movie_rating     # Build our indexable cache
-    input.close()
-    print movie_rating_cache
+    
     return movie_rating_cache
 
 
@@ -39,7 +38,7 @@ def read_avg_customer_cache(input, size):
             customer_id = int(data[0])
             movie_rating= int(data[1])
             customer_rating_cache[customer_id] = movie_rating     # Build our indexable cache
-    input.close()
+
     return customer_rating_cache
 
 def compute_estimated_rating(avg_customer_rating, avg_movie_rating):
@@ -57,9 +56,11 @@ def Netflix_solve(r, w) :
     MOVIENUM                = 17770
 
     input               = open("caches/avg_customer_rating.out", "r")
-    avg_movie_cache     = read_avg_movie_cache(input, CUSTNUM + 1)
+    avg_movie_cache     = read_avg_movie_cache(input, MOVIENUM + 1)
+    input.close()
     input               = open("caches/avg_movie_rating.out", "r")
-    avg_customer_cache  = read_avg_customer_cache(input, MOVIENUM + 1)
+    avg_customer_cache  = read_avg_customer_cache(input, CUSTNUM + 1)
+    input.close()
 
     movieID = -1
 
