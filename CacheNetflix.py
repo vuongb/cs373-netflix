@@ -196,7 +196,7 @@ def build_probe_answers():
 
     # Write all movies and their customers and ratings to output file
     print "Writing output file."
-    outputFile = open('data/probeAnswers.txt', 'w')
+    outputFile = open('data/probeCustomerandRatings.txt', 'w')
     for movieNum in MovieOrder :
 
             outputFile.write(str(movieNum) + ":\n") # write the movieID
@@ -204,7 +204,7 @@ def build_probe_answers():
             for customer in MovieCustArray[movieNum] :
                 #tupleIndex = [x[0] for x in MovieCustOutput[movieNum]].index(custID)
                 custRating = dict(MovieCustOutput[movieNum])[customer]
-                outputFile.write(str(customer) + ", " + str(custRating) + "\n")
+                outputFile.write(str(custRating) + "\n")
 
 
     outputFile.close()
@@ -217,4 +217,4 @@ def build_probe_answers():
 
 #read_training_data_avgmovie()
 #read_training_data_avgcust()
-build_probe_answers()
+#build_probe_answers()
