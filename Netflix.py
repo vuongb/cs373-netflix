@@ -42,6 +42,10 @@ def read_avg_customer_cache(input, size):
     return customer_rating_cache
 
 
+def read_decade_cache(input):
+
+
+
 
 # Weights
 # (customer:movie) - before extremity testing
@@ -103,6 +107,9 @@ def Netflix_solve(r, w) :
     input.close()
     input               = open("caches/avg_customer_rating.out", "r")
     avg_customer_cache  = read_avg_customer_cache(input, CUSTNUM + 1)
+    input.close()
+    input               = open("caches/customer_decade_rating.out", "r")
+    decade_cache        = read_decade_cache(input)
     input.close()
     output = w
 
