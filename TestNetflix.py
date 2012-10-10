@@ -60,6 +60,12 @@ class TestNetflix (unittest.TestCase) :
         self.assert_(result[7] == 3)
         self.assert_(result[33] == 4)
 
+    def test_read_customer_cache4 (self) :
+        size    = 2649429 + 1
+        r = open("caches/avg_customer_rating.out", "r")
+        result      = read_avg_customer_cache(r, size)
+        print result
+
 
     # ----
     # read_avg_movie_cache

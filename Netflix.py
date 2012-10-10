@@ -55,10 +55,10 @@ def Netflix_solve(r, w) :
     CUSTNUM                 = 2649429
     MOVIENUM                = 17770
 
-    input               = open("caches/avg_customer_rating.out", "r")
+    input               = open("caches/avg_movie_rating.out", "r")
     avg_movie_cache     = read_avg_movie_cache(input, MOVIENUM + 1)
     input.close()
-    input               = open("caches/avg_movie_rating.out", "r")
+    input               = open("caches/avg_customer_rating.out", "r")
     avg_customer_cache  = read_avg_customer_cache(input, CUSTNUM + 1)
     input.close()
 
